@@ -1,3 +1,5 @@
+import { goToSection } from "../../libs";
+
 export default () => {
   return (
     <div class="flex items-center justify-between flex-col lg:flex-row">
@@ -10,7 +12,7 @@ export default () => {
       </div>
       <div class="flex-1 lg:text-left text-center">
         <div class="lg:text-2xl text-xl font-bold">
-          Makanan Sehat Memberikan Berbagai Keuntungan Untuk Masa Depan
+          Healthy Food Provides Various Benefits For The Future
         </div>
         <div class="mt-8">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt
@@ -19,9 +21,16 @@ export default () => {
           exercitationem earum velit dolores.
         </div>
         <div class="mt-8">
-          <button class="bg-primary text-white px-10 p-3 rounded-full">
-            Hubungi Kami
-          </button>
+          <a
+            href="#contact"
+            class="bg-primary text-white px-10 p-3 rounded-full"
+            onClick={(e) => {
+              e.preventDefault();
+              goToSection("#contact");
+            }}
+          >
+            Contact Us
+          </a>
         </div>
       </div>
     </div>

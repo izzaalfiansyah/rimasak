@@ -48,8 +48,19 @@ export default () => {
   return (
     <>
       <div class="text-center mb-10">
-        <span class="text-2xl font-bold">Menu Populer</span>
+        <span class="text-2xl font-bold">Popular Menu</span>
       </div>
+
+      <Show when={!data.loading && !data()?.length}>
+        <div class="text-center">
+          <img
+            src="https://img.freepik.com/free-vector/file-searching-concept-illustration_114360-437.jpg?w=740&t=st=1673965838~exp=1673966438~hmac=b6e5a4a964f1cd335bb90e04a717e8d71cb9cefc02792b6457d89ada2bc918a0"
+            alt="not found image"
+            class="inline lg:w-[500px]"
+          />
+        </div>
+      </Show>
+
       <div class="grid lg:grid-cols-3 grid-cols-2 gap-4 lg:px-10">
         <Show
           when={!data.loading}
@@ -70,7 +81,7 @@ export default () => {
             {(item) => (
               <div class="bg-gray-100 rounded-lg overflow-hidden relative flex flex-col">
                 <div class="absolute top-2 left-2 flex space-x-2 items-center">
-                  <button class="bg-white rounded-full h-9 w-9 flex items-center justify-center">
+                  {/* <button class="bg-white rounded-full h-9 w-9 flex items-center justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -102,7 +113,7 @@ export default () => {
                     <span class="font-semibold">
                       {item.content.details?.rating || "-"}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 <img
                   src={item.display.images[0]}
@@ -122,7 +133,7 @@ export default () => {
                   </div>
                   <div class="mt-4 text-right">
                     <button class="rounded-full px-5 p-2 border border-primary text-primary hover:bg-primary hover:text-white transition">
-                      Buat Menu
+                      Make Now
                     </button>
                   </div>
                 </div>
@@ -133,7 +144,7 @@ export default () => {
       </div>
       <div class="mt-10 flex items-center justify-center">
         <Link href="/menu" class="bg-primary rounded-full p-3 px-10 text-white">
-          Selengkapnya
+          More
         </Link>
       </div>
     </>

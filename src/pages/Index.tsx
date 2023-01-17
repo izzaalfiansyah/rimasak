@@ -15,7 +15,7 @@ const IndexPage = () => {
           <Hero />
         </section>
         <div class="py-10"></div>
-        <section id="tentang">
+        <section id="about">
           <About />
         </section>
         <div class="py-10"></div>
@@ -23,7 +23,7 @@ const IndexPage = () => {
           <MenuPopuler />
         </section>
         <div class="py-10"></div>
-        <section id="kontak">
+        <section id="contact">
           <Kontak />
         </section>
       </div>
