@@ -1,42 +1,12 @@
 import { For, Show, createResource } from "solid-js";
-import http from "../../libs/http";
 import { Link } from "@solidjs/router";
-
-export interface IngredientLine {
-  category: string;
-  ingredient: string;
-  quantity?: number;
-  unit?: string;
-}
-
-export interface Feed {
-  display: {
-    displayName: string;
-    images: string[];
-  };
-  content: {
-    description: {
-      text: string;
-    };
-    details: {
-      rating?: number;
-      totalTime: string;
-    };
-    ingredientLines: Array<IngredientLine>;
-    preparationSteps: Array<string>;
-  };
-}
+import Feed from "../../interfaces/Feed";
+import menu from "../../services/Menu";
 
 export default () => {
   async function get() {
     try {
-      const data = await http.get("/feeds/list", {
-        params: {
-          limit: 6,
-          start: 0,
-          tag: "list.recipe.popular",
-        },
-      });
+      const data = await menu.popular();
       return data.data.feed;
     } catch (e) {
       return [];

@@ -1,21 +1,17 @@
-import {
-  For,
-  Show,
-  createResource,
-  createSignal,
-  onCleanup,
-  onMount,
-} from "solid-js";
+import { For, Show, createResource, createSignal } from "solid-js";
 import http from "../libs/http";
-import { Feed } from "../components/index/MenuPopuler";
 import { Link, useSearchParams } from "@solidjs/router";
+import Feed from "../interfaces/Feed";
+import MenuDetailPage from "./MenuDetail";
 
 const MenuPage = () => {
   const limit = 12;
   const [start, setStart] = createSignal(0);
+  const [item, setItem] = createSignal<Feed>();
+  const [showDetail, setShowDetail] = createSignal(false);
   const [searchParams, setSearchParams] = useSearchParams<any>();
 
-  const [data, { mutate, refetch }] = createResource<Array<Feed>, any>(
+  const [data, { mutate }] = createResource<Array<Feed>, any>(
     () => ({ start: start(), q: searchParams.q }),
     get
   );
@@ -49,22 +45,11 @@ const MenuPage = () => {
     }
   }
 
-  onMount(() => {
-    document.addEventListener("scroll", (e) => {
-      const { clientHeight, scrollTop, scrollHeight } =
-        document.documentElement;
-
-      if (!data.loading && !searchParams.q) {
-        if (scrollHeight < clientHeight + scrollTop + 10) {
-          setStart((val) => val + limit);
-        }
-      }
-    });
-  });
-
-  onCleanup(() => {
-    document.removeEventListener("scroll", () => {});
-  });
+  function loadMore() {
+    if (!data.loading && !searchParams.q) {
+      setStart((val) => val + limit);
+    }
+  }
 
   return (
     <div class="bg-white leading-normal tracking-normal text-sm px-6 lg:px-20 pb-10">
@@ -245,7 +230,13 @@ const MenuPage = () => {
                   {item.display.displayName}
                 </div>
                 <div class="mt-4 text-right">
-                  <button class="rounded-full px-5 p-2 border border-primary text-primary hover:bg-primary hover:text-white transition">
+                  <button
+                    class="rounded-full px-5 p-2 border border-primary text-primary hover:bg-primary hover:text-white transition"
+                    onClick={() => {
+                      setItem(item);
+                      setShowDetail(!showDetail());
+                    }}
+                  >
                     Make Now
                   </button>
                 </div>
@@ -264,6 +255,19 @@ const MenuPage = () => {
           </For>
         </Show>
       </div>
+      <Show when={!data.loading && !searchParams.q}>
+        <div class="text-center mt-10">
+          <button
+            class="bg-primary text-white px-8 py-3 rounded-full"
+            type="button"
+            onClick={loadMore}
+          >
+            Load More
+          </button>
+        </div>
+      </Show>
+
+      <MenuDetailPage menu={item()} show={[showDetail, setShowDetail]} />
     </div>
   );
 };

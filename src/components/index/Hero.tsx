@@ -23,10 +23,10 @@ export default () => {
           Be The Fastest In Delivering Your Food
         </div>
         <div class="mt-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nulla
-          ex culpa ab, sit doloribus impedit laboriosam. Beatae, excepturi
-          quisquam aperiam voluptas necessitatibus sit dolor, numquam quibusdam
-          ipsum placeat iste.
+          Cooking is fun with the convenience provided by the various menus
+          available. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Ullam, enim natus! Laboriosam saepe aliquam esse dignissimos sed totam
+          autem consequuntur excepturi.
         </div>
         <div class="mt-8">
           <form class="relative" onSubmit={handleSubmit}>
